@@ -1,0 +1,87 @@
+<!-- CSS for the login boxes. -->
+
+<style>
+.box { margin:30px }
+.error {background-color: #fee; margin:2px; border-color:#fdd; display:hidden}
+</style>
+
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js'></script>
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+<script>
+window.onload = function () {
+
+  // On form submit, post to /new_user or /login.  Display any errors.
+
+  var strs = ['new_user', 'login']
+  for(var i = 0; i < strs.length; i++) {
+    $('#' + strs[i]).submit(function(el_id){ return function(e) {
+      e.preventDefault()
+
+      var username = $('#' + el_id).find('input[name=username]').val(),
+          netid = $('#' + el_id).find('input[name=netid]').val(),
+          password = $('#' + el_id).find('input[name=password]').val()
+
+      $.post(
+        '/' + el_id,
+        {'netid':netid, 'username':username, 'password':password}
+      ).done(
+        function(data) {
+            window.location.href = "/"
+        }
+      ).fail(
+        function(data) {
+            $('#' + el_id + ' > .error').html(
+                '<p>Error: {0}</p>'.replace('{0}', data.responseText))
+        }
+      )
+      return false
+    }}(strs[i]));
+  }
+
+  $('.new-account-link').click(function(){
+    $('.new_user').slideDown()
+    $('.login').slideUp()
+  })
+}
+</script>
+
+<!-- The login forms. -->
+<div align="center">
+  <h2>CS 5412:Cloud Computing - Project 2</h2>
+</div>
+
+<div style='margin:30px' align = "center">
+  <a class='new-account-link' style='cursor:pointer'>
+    Don't have an account yet?  Click here to create one.
+  </a>
+</div>
+
+<div class="new_user box" style='display:none' align="center">
+<p>New User</p>
+<form id="new_user">
+    <p class="error"></p>
+    <div><input name='netid' placeholder='NetID'/></div>
+    <div><input name='username' placeholder='Username'/></div>
+    <div><input name='password' type='password' placeholder='Password'/></div>
+    <button type='submit' class='btn btn-default'>Send</button>
+</form>
+</div>
+
+<div class="login box">
+  <p>Login</p>
+  <form id='login'>
+      <p class="error"></p>
+      <div><input name='username' placeholder='Username'/></div>
+      <div><input name='password' type='password' placeholder='Password'/></div>
+      <button type='submit' class='btn btn-default'>Send</button>
+  </form>
+
+</div>
+
+
+
+
+
+
+

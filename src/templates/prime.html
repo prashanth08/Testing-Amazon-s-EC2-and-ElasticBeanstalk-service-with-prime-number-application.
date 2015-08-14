@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+   <HEAD>
+      <TITLE>
+         Prime Page
+      </TITLE>
+   </HEAD>
+<BODY>
+
+<style>
+.box { margin:30px }
+.error {background-color: #fee; margin:2px; border-color:#fdd; display:hidden}
+</style>
+
+<script type="text/javascript">
+function check_prime(){
+
+	var num = document.getElementById('mynumber').value;
+  var n = parseInt(num);
+  var s;  // String to be displayed to the end-user.
+  if(n != ''){
+      try {         
+          if (isPrime(n)) {
+              s = n + " is a prime number.";
+          }
+          else {
+              s = n + " is not a prime number.";
+          }
+      }
+      catch (e) {
+          if (e.name && e.message) {
+              s = e.name + ": " + e.message;
+          }
+          else {
+              s = "An unknown exception occurred.";
+          }
+      }
+    
+      document.getElementById("output").innerHTML = s;
+    }
+  else
+    alert("Please enter a valid number?") 
+}
+
+function isPrime(n) {
+    var i;              // Loop index.
+    var max = 1000000000000000000;  // Arbitrary maximum value.
+
+    // Check the preconditions.
+    if (parseInt(n, 10) !== +n || n < 0 || n > max) {
+        throw new Error(
+            "Please provide a nonnegative integer that is less than or " +
+            "equal to " + max + "."
+        );
+    }
+
+    if (n == 2) {
+      return true;
+    } else if ((n < 2) || (n % 2 == 0)) {
+      return false;
+    } else {
+      for (var i = 3; i <= Math.sqrt(n); i += 2) {
+        if (n % i == 0)
+          return false;
+      }
+      return true;
+    }
+}
+
+
+</script>
+
+
+<div class="prime" align="center">
+  <p>  
+  		<h2 id='foo'>Primality Test</h2>
+  </p>
+  <form id='prime'>
+      <p class="error"></p>
+      <div>
+      <input type='number' step = 'any' id='mynumber' value="Enter number </br>" />
+	  <input type='button' onclick='check_prime()' value='Prime Checker' />
+  </form>
+  <p>
+  <a href="/logout">Logout</a>
+  </p>
+  <h3><p id="output"></p></h3>
+
+</div>
+    
+</BODY>
+</HTML>

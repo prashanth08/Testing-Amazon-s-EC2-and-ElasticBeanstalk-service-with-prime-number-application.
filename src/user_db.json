@@ -1,0 +1,13 @@
+{
+  "user_info": {
+    "prash": {
+      "email": "p@gmail.com"
+    }
+  }, 
+  "hashes": {
+    "prash": "a77d2d008738bb854122cf35cb0ac6dda3436a57692de0d7754168fb"
+  }, 
+  "salts": {
+    "prash": "ad31419f-0ccb-4af6-b9fe-ff4aa3cf01c9"
+  }
+}

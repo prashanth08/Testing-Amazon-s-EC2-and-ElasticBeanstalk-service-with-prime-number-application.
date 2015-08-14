@@ -1,0 +1,5 @@
+ken kpb3 passken 
+Minimum = 0.290469884872
+Maximum = 6.31281709671
+Mean = 0.315687337017
+Median = 0.302602052689
